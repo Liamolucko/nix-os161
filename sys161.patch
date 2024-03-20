@@ -1,0 +1,10 @@
+diff --git a/include/onsel.h b/include/onsel.h
+index 4837207..3698e19 100644
+--- a/include/onsel.h
++++ b/include/onsel.h
+@@ -28,4 +28,4 @@ void notonselect(int fd);
+ uint64_t tryselect(int do_timeout, uint64_t nsecs);
+
+ /* Extra time from waiting in select (while dispatching select events) */
+-uint64_t extra_selecttime;
++extern uint64_t extra_selecttime;
