@@ -47,6 +47,9 @@ stdenv.mkDerivation rec {
     "--disable-libstdcxx"
     "--disable-nls"
     "--target=mips-harvard-os161"
+    # not part of original instructions
+    "--with-as=${os161-binutils}/bin/mips-harvard-os161-as"
+    "--with-ld=${os161-binutils}/bin/mips-harvard-os161-ld"
   ];
   postInstall = ''
     cd $out/bin
