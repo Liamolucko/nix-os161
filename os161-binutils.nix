@@ -2,6 +2,11 @@
 stdenv.mkDerivation rec {
   pname = "os161-binutils";
   version = "2.24+os161-2.1";
+  outputs = [
+    "out"
+    "man"
+    "info"
+  ];
   src = fetchurl {
     url = "http://www.os161.org/download/binutils-${version}.tar.gz";
     hash = "sha256-fBIhrVOO4tcs5La62ZbXAbKo4hl3wP18m7YCDANc5mQ=";

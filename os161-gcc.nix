@@ -10,6 +10,11 @@
 stdenv.mkDerivation rec {
   pname = "os161-gcc";
   version = "4.8.3+os161-2.1";
+  outputs = [
+    "out"
+    "man"
+    "info"
+  ];
   src = fetchurl {
     url = "http://www.os161.org/download/gcc-${version}.tar.gz";
     hash = "sha256-BwZZ0Uq2+QXp34mJG3j54FLBFODE0BHGMLLwd4jQNZ4=";

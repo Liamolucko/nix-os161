@@ -6,6 +6,11 @@
 stdenv.mkDerivation rec {
   pname = "os161-gdb";
   version = "7.8+os161-2.1";
+  outputs = [
+    "out"
+    "man"
+    "info"
+  ];
   src = fetchurl {
     url = "http://www.os161.org/download/gdb-${version}.tar.gz";
     hash = "sha256-HBbi2Ds7/lLoEz48On0fCDstAQ/hwQenjt5kObGx/mE=";
