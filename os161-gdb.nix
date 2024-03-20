@@ -6,11 +6,6 @@
 stdenv.mkDerivation rec {
   pname = "os161-gdb";
   version = "7.8+os161-2.1";
-  outputs = [
-    "out"
-    "man"
-    "info"
-  ];
   src = fetchurl {
     url = "http://www.os161.org/download/gdb-${version}.tar.gz";
     hash = "sha256-HBbi2Ds7/lLoEz48On0fCDstAQ/hwQenjt5kObGx/mE=";
@@ -29,5 +24,7 @@ stdenv.mkDerivation rec {
   postInstall = ''
     cd $out/bin
     for i in mips-*; do ln -s $i os161-`echo $i | cut -d- -f4-`; done
+    # Delete the (partially) broken man and info pages.
+    rm -rf $out/share/{man,info}
   '';
 }
