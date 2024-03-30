@@ -12,18 +12,28 @@
       nixpkgs,
       flake-utils,
     }:
-    flake-utils.lib.eachDefaultSystem (
+    {
+      overlays.default = final: prev: {
+        os161-binutils = final.callPackage (import ./os161-binutils.nix) { };
+        os161-gcc = final.callPackage (import ./os161-gcc.nix) { };
+        os161-gdb = final.callPackage (import ./os161-gdb.nix) { };
+        sys161 = final.callPackage (import ./sys161.nix) { };
+      };
+    }
+    // flake-utils.lib.eachDefaultSystem (
       system:
       let
-        callPackage = nixpkgs.lib.callPackageWith (
-          nixpkgs.legacyPackages.${system} // self.packages.${system}
-        );
+        pkgs = nixpkgs.legacyPackages.${system}.extend self.overlays.default;
       in
-      rec {
-        packages.os161-binutils = callPackage (import ./os161-binutils.nix) { };
-        packages.os161-gcc = callPackage (import ./os161-gcc.nix) { };
-        packages.os161-gdb = callPackage (import ./os161-gdb.nix) { };
-        packages.sys161 = callPackage (import ./sys161.nix) { };
+      {
+        packages = {
+          inherit (pkgs)
+            os161-binutils
+            os161-gcc
+            os161-gdb
+            sys161
+            ;
+        };
       }
     );
 }
