@@ -56,5 +56,10 @@ stdenv.mkDerivation rec {
     for i in mips-*; do ln -s $i os161-`echo $i | cut -d- -f4-`; done
     # Delete the (partially) broken man and info pages.
     rm -rf $out/share/{man,info}
+
+    # Remove `fixincl' to prevent a dependency on `bash` and `sed` (copied from
+    # nixpkgs gcc).
+    rm -rf $out/libexec/gcc/*/*/install-tools
+    rm -rf $out/lib/gcc/*/*/install-tools
   '';
 }
