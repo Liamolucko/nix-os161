@@ -6,6 +6,7 @@
   libmpc,
   mpfr,
   cloog_0_18_0,
+  zlib,
 }:
 stdenv.mkDerivation rec {
   pname = "os161-gcc";
@@ -21,6 +22,7 @@ stdenv.mkDerivation rec {
     libmpc
     mpfr
     cloog_0_18_0
+    zlib
   ];
   patches = [ ./gcc.patch ];
 
@@ -50,6 +52,7 @@ stdenv.mkDerivation rec {
     # not part of original instructions
     "--with-as=${os161-binutils}/bin/mips-harvard-os161-as"
     "--with-ld=${os161-binutils}/bin/mips-harvard-os161-ld"
+    "--with-system-zlib"
   ];
   postInstall = ''
     cd $out/bin
